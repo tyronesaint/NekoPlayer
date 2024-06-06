@@ -45,6 +45,7 @@
 		8AA22ED429CFD067004FC764 /* TVMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA22ED229CFD067004FC764 /* TVMenu.swift */; };
 		8AA22ED629D05BAA004FC764 /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA22ED529D05BAA004FC764 /* UserConfig.swift */; };
 		8AA22ED729D05BAA004FC764 /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA22ED529D05BAA004FC764 /* UserConfig.swift */; };
+		8AD5B6EF2C11F56F00E81107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5B6EE2C11F56F00E81107 /* AppDelegate.swift */; };
 		8AF01DD929D4BDF5009A4283 /* AutoStoredWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF01DD829D4BDF5009A4283 /* AutoStoredWrapper.swift */; };
 		8AF01DDA29D4BDF5009A4283 /* AutoStoredWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF01DD829D4BDF5009A4283 /* AutoStoredWrapper.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		8AA22ECB29CF6A96004FC764 /* CenterResize.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CenterResize.metal; sourceTree = "<group>"; };
 		8AA22ED229CFD067004FC764 /* TVMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMenu.swift; sourceTree = "<group>"; };
 		8AA22ED529D05BAA004FC764 /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
+		8AD5B6EE2C11F56F00E81107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AECBC1727790AA200922C26 /* Anime4KMetal (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Anime4KMetal (iOS).entitlements"; sourceTree = "<group>"; };
 		8AF01DD829D4BDF5009A4283 /* AutoStoredWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoStoredWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +147,7 @@
 				8A07C91027783E530023EC36 /* glsl */,
 				8AA22ED829D05C3A004FC764 /* UI */,
 				8A0DF66027782DD700C09201 /* Anime4KMetalApp.swift */,
+				8AD5B6EE2C11F56F00E81107 /* AppDelegate.swift */,
 				8A0DF66227782DD700C09201 /* Assets.xcassets */,
 				8A0DF6A127782E0400C09201 /* MPVShader.swift */,
 				8A07C95727784C680023EC36 /* Anime4K.swift */,
@@ -399,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AD5B6EF2C11F56F00E81107 /* AppDelegate.swift in Sources */,
 				8AA22ED629D05BAA004FC764 /* UserConfig.swift in Sources */,
 				8A07C95827784C680023EC36 /* Anime4K.swift in Sources */,
 				8AF01DD929D4BDF5009A4283 /* AutoStoredWrapper.swift in Sources */,

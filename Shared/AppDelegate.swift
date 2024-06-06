@@ -1,4 +1,4 @@
-// Copyright 2023 Yi Xie
+// Copyright 2024 Yi Xie
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,17 @@
 //
 
 import Foundation
-import Combine
+import UIKit
 
-class UserConfig: ObservableObject {
-    @AutoStored("force_landscape") var forceLandscape = true
-    @AutoStored("show_perf_overlay") var showPerfOverlay = true
-    @AutoStored("selected_shaders") var selected: [String] = []
+class AppDelegate: NSObject, UIApplicationDelegate {
     
-    init() {
-        Mirror(reflecting: self).children.forEach { child in
-            if let observedProperty = child.value as? PublishedWrapper {
-                observedProperty.objectWillChange = self.objectWillChange
-            }
-        }
+    static var orientationLock = UIInterfaceOrientationMask.allButUpsideDown
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window:UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationLock
     }
 }

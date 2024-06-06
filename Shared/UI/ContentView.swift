@@ -22,6 +22,7 @@ struct ContentView: View {
     @State var localFileUrl: URL = URL(fileURLWithPath: "file:///")
     @State var playerViewItem: PlayerViewItem? = nil
     @State var showFileImporter = false
+    @State var originalOrientation: UIInterfaceOrientation?
     
     @StateObject var config = UserConfig()
     
@@ -115,11 +116,14 @@ struct ContentView: View {
                 Text("Shader selection")
             }
             Section {
+                Toggle(isOn: $config.forceLandscape) {
+                    Text("Force landscape in player")
+                }
                 Toggle(isOn: $config.showPerfOverlay) {
-                    Text("Performance overlay")
+                    Text("Show performance overlay")
                 }
             } header: {
-                Text("Debug")
+                Text("Display")
             }
             Section {
                 TextField("Input URL", text: $videoUrl)
@@ -155,26 +159,45 @@ struct ContentView: View {
             shaders = shaders.sorted()
         }
         .fullScreenCover(item: $playerViewItem) { item in
-            if item == .remote {
-                #if os(tvOS)
-                PlayerView(shaders: config.selected, videoUrl: URL(string: videoUrl)!)
-                    .ignoresSafeArea()
-                #else
-                PlayerView(shaders: config.selected, videoUrl: URL(string: videoUrl)!)
-                    .ignoresSafeArea(.container, edges: .vertical)
-                    .statusBarHidden()
-                    .modifier(HideOverlayModifier())
-                #endif
-            } else if item == .local {
-                #if os(tvOS)
-                PlayerView(shaders: config.selected, videoUrl: localFileUrl)
-                    .ignoresSafeArea()
-                #else
-                PlayerView(shaders: config.selected, videoUrl: localFileUrl)
-                    .ignoresSafeArea(.container, edges: .vertical)
-                    .statusBarHidden()
-                    .modifier(HideOverlayModifier())
-                #endif
+            Group {
+                if item == .remote {
+                    #if os(tvOS)
+                    PlayerView(shaders: config.selected, videoUrl: URL(string: videoUrl)!)
+                        .ignoresSafeArea()
+                    #else
+                    PlayerView(shaders: config.selected, videoUrl: URL(string: videoUrl)!)
+                        .ignoresSafeArea(.container, edges: .vertical)
+                        .statusBarHidden()
+                        .modifier(HideOverlayModifier())
+                    #endif
+                } else if item == .local {
+                    #if os(tvOS)
+                    PlayerView(shaders: config.selected, videoUrl: localFileUrl)
+                        .ignoresSafeArea()
+                    #else
+                    PlayerView(shaders: config.selected, videoUrl: localFileUrl)
+                        .ignoresSafeArea(.container, edges: .vertical)
+                        .statusBarHidden()
+                        .modifier(HideOverlayModifier())
+                    #endif
+                }
+            }
+            .onAppear {
+                originalOrientation = (UIApplication.shared.connectedScenes.first as! UIWindowScene).interfaceOrientation
+                if config.forceLandscape {
+                    AppDelegate.orientationLock = .landscape
+                    UIViewController.attemptRotationToDeviceOrientation()
+                }
+            }
+            .onDisappear {
+                if config.forceLandscape {
+                    AppDelegate.orientationLock = .allButUpsideDown
+                    if let originalOrientation, originalOrientation == .portrait {
+                        AppDelegate.orientationLock = .portrait
+                        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                    }
+                    UIViewController.attemptRotationToDeviceOrientation()
+                }
             }
         }
     }

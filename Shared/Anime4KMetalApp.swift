@@ -17,6 +17,9 @@ import SwiftUI
 
 @main
 struct Anime4KMetalApp: App {
+    #if !os(tvOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
     var body: some Scene {
         WindowGroup {
             ContentView()
