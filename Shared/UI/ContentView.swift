@@ -22,7 +22,9 @@ struct ContentView: View {
     @State var localFileUrl: URL = URL(fileURLWithPath: "file:///")
     @State var playerViewItem: PlayerViewItem? = nil
     @State var showFileImporter = false
+    #if !os(tvOS)
     @State var originalOrientation: UIInterfaceOrientation?
+    #endif
     
     @StateObject var config = UserConfig()
     
@@ -182,6 +184,7 @@ struct ContentView: View {
                     #endif
                 }
             }
+            #if !os(tvOS)
             .onAppear {
                 originalOrientation = (UIApplication.shared.connectedScenes.first as! UIWindowScene).interfaceOrientation
                 if config.forceLandscape {
@@ -199,6 +202,7 @@ struct ContentView: View {
                     UIViewController.attemptRotationToDeviceOrientation()
                 }
             }
+            #endif
         }
     }
     
