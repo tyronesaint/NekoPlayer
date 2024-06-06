@@ -99,7 +99,6 @@ class PlayerController: AVPlayerViewController, MTKViewDelegate {
         // Setup MTKView
         mtkView = MTKView(frame: view.frame, device: device)
         mtkView.translatesAutoresizingMaskIntoConstraints = false
-        view.insertSubview(mtkView, at: 0)
         mtkView.delegate = self
         mtkView.framebufferOnly = false
         mtkView.autoResizeDrawable = true
@@ -110,23 +109,12 @@ class PlayerController: AVPlayerViewController, MTKViewDelegate {
         // Setup performance banner
         perfBanner = UILabel()
         perfBanner.translatesAutoresizingMaskIntoConstraints = false
-        view.insertSubview(perfBanner, at: 1)
         perfBanner.isHidden = !showPerfOverlay
         perfBanner.backgroundColor = .black
         perfBanner.textColor = .white
         perfBanner.alpha = 0.5
         perfBanner.textAlignment = .left
         perfBanner.font = .monospacedSystemFont(ofSize: 13, weight: .thin)
-        view.addConstraints([
-            NSLayoutConstraint(item: mtkView!, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: mtkView!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: mtkView!, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: mtkView!, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: perfBanner!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20),
-            NSLayoutConstraint(item: perfBanner!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: perfBanner!, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: perfBanner!, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-        ])
     }
     
     func playVideo() {
@@ -150,6 +138,18 @@ class PlayerController: AVPlayerViewController, MTKViewDelegate {
         guard !(player?.isPlaying ?? false) else {
             return
         }
+        view.insertSubview(mtkView, at: 0)
+        view.insertSubview(perfBanner, at: 1)
+        view.addConstraints([
+            NSLayoutConstraint(item: mtkView!, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: mtkView!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: mtkView!, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: mtkView!, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: perfBanner!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20),
+            NSLayoutConstraint(item: perfBanner!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: perfBanner!, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: perfBanner!, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+        ])
         #if os(iOS)
         view.subviews[2].subviews[0].isHidden = true
         #endif
