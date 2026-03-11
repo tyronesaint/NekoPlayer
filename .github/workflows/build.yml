@@ -26,7 +26,7 @@ jobs:
     - name: Build iOS (Debug)
       run: |
         xcodebuild -project Anime4KMetal.xcodeproj \
-          -scheme "NekoPlayer (iOS)" \
+          -scheme "Anime4KMetal (iOS)" \
           -configuration Debug \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15' \
@@ -37,7 +37,7 @@ jobs:
     - name: Build iOS (Release)
       run: |
         xcodebuild -project Anime4KMetal.xcodeproj \
-          -scheme "NekoPlayer (iOS)" \
+          -scheme "Anime4KMetal (iOS)" \
           -configuration Release \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15' \
@@ -74,7 +74,7 @@ jobs:
     - name: Build tvOS
       run: |
         xcodebuild -project Anime4KMetal.xcodeproj \
-          -scheme "NekoPlayer (tvOS)" \
+          -scheme "Anime4KMetal (tvOS)" \
           -configuration Release \
           -sdk appletvsimulator \
           -destination 'platform=tvOS Simulator,name=Apple TV' \
@@ -109,7 +109,7 @@ jobs:
     - name: Build macOS
       run: |
         xcodebuild -project Anime4KMetal.xcodeproj \
-          -scheme "NekoPlayer (iOS)" \
+          -scheme "Anime4KMetal (iOS)" \
           -configuration Release \
           -destination 'platform=macOS' \
           clean build \
