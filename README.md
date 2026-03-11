@@ -92,6 +92,21 @@ open NekoPlayer.xcodeproj
 
 ### 命令行构建
 
+#### 方法 1：使用自适应构建脚本（推荐）
+
+```bash
+# 自动检测并使用最佳模拟器
+bash scripts/build_ios.sh
+```
+
+脚本会自动：
+- ✅ 检测当前环境可用的模拟器
+- ✅ 选择最佳模拟器（优先 iPhone 16 → 15 → 14）
+- ✅ 自动适配 iOS 版本
+- ✅ 执行构建
+
+#### 方法 2：手动指定模拟器
+
 ```bash
 # Debug 构建
 xcodebuild -project NekoPlayer.xcodeproj \
@@ -109,6 +124,56 @@ xcodebuild -project NekoPlayer.xcodeproj \
   -destination 'platform=iOS Simulator,name=iPhone 15' \
   clean build
 ```
+
+> 💡 **提示**：手动构建前可以使用 `xcrun simctl list devices available iOS | grep iPhone` 查看可用的模拟器。
+
+#### GitHub Actions 自动构建
+
+推送到 GitHub 后，会自动触发构建：
+
+```bash
+git push origin main
+```
+
+构建系统会自动选择最佳的模拟器，无需手动配置。
+
+详细信息请查看 [BUILD_SYSTEM.md](BUILD_SYSTEM.md)。
+
+---
+
+## 🔧 自适应构建系统
+
+NekoPlayer 采用智能模拟器选择机制，能够自动适应不同的 Xcode 版本和运行环境：
+
+### 特性
+
+✅ **智能模拟器选择**：根据优先级自动选择最佳模拟器
+✅ **跨版本兼容**：支持 iOS 15.0+ 和 tvOS 15.0+
+✅ **自适应环境**：适应不同的 Xcode 版本和 GitHub Actions runner
+✅ **零维护成本**：无需手动更新模拟器配置
+
+### 工作原理
+
+构建系统会按优先级选择模拟器：
+
+1. **设备优先级**：iPhone 16 → 15 → 14 → 13 → SE
+2. **iOS 版本优先级**：18.0 → 17.x → 16.x → 15.x
+3. **自动回退**：如果优先级设备不可用，使用第一个可用设备
+
+### 使用方法
+
+```bash
+# 本地构建（自动选择模拟器）
+bash scripts/build_ios.sh
+
+# 测试模拟器选择逻辑
+bash scripts/test_simulators.sh
+
+# GitHub Actions（推送后自动触发）
+git push origin main
+```
+
+详细文档请查看 [BUILD_SYSTEM.md](BUILD_SYSTEM.md)。
 
 ---
 
@@ -201,8 +266,12 @@ NekoPlayer/
 - [README.md](README.md) - 项目说明（本文件）
 - [USAGE_GUIDE.md](USAGE_GUIDE.md) - 详细使用指南
 - [DEVELOPER.md](DEVELOPER.md) - 开发者文档
+- [BUILD_SYSTEM.md](BUILD_SYSTEM.md) - 自适应构建系统文档
+- [GITHUB_ACTIONS_FIX.md](GITHUB_ACTIONS_FIX.md) - GitHub Actions Xcode 版本检测修复
+- [SIMULATOR_OS_FIX.md](SIMULATOR_OS_FIX.md) - 模拟器 OS 版本缺失修复
 - [CHANGELOG.md](CHANGELOG.md) - 版本更新日志
 - [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - 项目总结
+- [UPDATE_SUMMARY.md](UPDATE_SUMMARY.md) - 更新总结
 
 ---
 

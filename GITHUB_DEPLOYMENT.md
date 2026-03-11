@@ -125,7 +125,7 @@ cd NekoPlayer
 git submodule update --init --recursive
 
 # 3. 打开 Xcode
-open Anime4KMetal.xcodeproj
+open NekoPlayer.xcodeproj
 
 # 4. 选择目标设备
 #    - iOS 模拟器: iPhone 15

@@ -9,152 +9,227 @@ on:
 
 jobs:
   build-ios:
-    name: Build for iOS
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        submodules: recursive
 
-    - name: Setup Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.0'
-
-    - name: List Available Simulators
+    - name: Select Xcode version
       run: |
-        xcrun simctl list devices available iOS | grep iPhone
+        # 列出所有可用的 Xcode 版本
+        echo "📦 Available Xcode versions:"
+        ls -la /Applications/ | grep Xcode
 
-    - name: Build iOS (Debug)
+        # 自动选择最新的 Xcode 版本
+        LATEST_XCODE=$(ls /Applications/ | grep "^Xcode_" | sort -V | tail -1)
+
+        if [ -n "$LATEST_XCODE" ]; then
+          echo "🎯 Using Xcode: $LATEST_XCODE"
+          sudo xcode-select -switch "/Applications/$LATEST_XCODE"
+        else
+          echo "⚠️  No Xcode_*.app found, using default"
+        fi
+
+        xcodebuild -version
+
+    - name: Show available simulators
       run: |
+        echo "📱 Available iOS Simulators:"
+        xcrun simctl list devices available iOS | grep iPhone || true
+
+    - name: Auto-select iOS simulator
+      id: select_ios
+      run: |
+        # 使用 JSON 格式获取模拟器信息
+        JSON_OUTPUT=$(xcrun simctl list devices available iOS --json)
+
+        echo "🔍 JSON output preview:"
+        echo "$JSON_OUTPUT" | head -c 500
+
+        # 模拟器优先级
+        DEVICES=(
+          "iPhone 16"
+          "iPhone 16 Pro"
+          "iPhone 16 Plus"
+          "iPhone 16 Pro Max"
+          "iPhone 16e"
+          "iPhone 15"
+          "iPhone 15 Pro"
+          "iPhone 15 Plus"
+          "iPhone 15 Pro Max"
+          "iPhone 14"
+          "iPhone 14 Pro"
+          "iPhone 14 Pro Max"
+          "iPhone 13"
+          "iPhone 13 Pro"
+          "iPhone 13 Pro Max"
+          "iPhone SE (3rd generation)"
+        )
+
+        # iOS 版本优先级（从高到低）
+        # 这里的版本号用于匹配 JSON 中的 runtime key，格式是 iOS-xx-x
+        OS_VERSIONS=(
+          "iOS-18-0" "iOS-17-5" "iOS-17-4" "iOS-17-3" "iOS-17-2" "iOS-17-1" "iOS-17-0"
+          "iOS-16-7" "iOS-16-6" "iOS-16-5" "iOS-16-4" "iOS-16-3" "iOS-16-2" "iOS-16-1" "iOS-16-0"
+          "iOS-15-7" "iOS-15-6" "iOS-15-5" "iOS-15-4" "iOS-15-3" "iOS-15-2" "iOS-15-1" "iOS-15-0"
+        )
+
+        SELECTED_DEVICE=""
+        SELECTED_DEVICE_ID=""
+        SELECTED_OS=""
+
+        # 遍历设备和版本，找到第一个可用的组合
+        for device in "${DEVICES[@]}"; do
+          for os_version in "${OS_VERSIONS[@]}"; do
+            # 从 JSON 中提取设备 ID
+            # JSON 格式: {"devices":{"iOS-18-0":{"iPhone 16 Pro":"uuid"}}}
+            DEVICE_ID=$(echo "$JSON_OUTPUT" | grep -o "\"$os_version\".*\"$device\"[^,}]*" | grep -o "\"[A-F0-9-]\{36\}\"" | head -1 | tr -d '"')
+
+            if [ ! -z "$DEVICE_ID" ]; then
+              SELECTED_DEVICE="$device"
+              SELECTED_DEVICE_ID="$DEVICE_ID"
+              # 从 iOS-18-0 提取 18.0
+              SELECTED_OS=$(echo "$os_version" | sed 's/iOS-//' | sed 's/-/./g')
+              echo "✅ Found: $device (iOS $SELECTED_OS)"
+              break 2
+            fi
+          done
+        done
+
+        # 如果优先级列表中的设备都没找到，使用 JSON 中第一个可用的设备
+        if [ -z "$SELECTED_DEVICE_ID" ]; then
+          echo "⚠️  Preferred devices not found, using first available device"
+
+          # 从 JSON 中提取第一个可用设备
+          # 使用 sed 和 awk 解析 JSON
+          FIRST_DEVICE=$(echo "$JSON_OUTPUT" | grep -o '"[^"]*"' | grep -E "iPhone [0-9]+" | head -1 | tr -d '"')
+          FIRST_DEVICE_ID=$(echo "$JSON_OUTPUT" | grep -o '"[A-F0-9-]\{36\}"' | head -1 | tr -d '"')
+          FIRST_OS=$(echo "$JSON_OUTPUT" | grep -o '"com\.apple\.CoreSimulator\.SimRuntime\.[^"]*"' | head -1 | sed 's/.*iOS-//' | sed 's/"//' | sed 's/-/./g')
+
+          SELECTED_DEVICE="$FIRST_DEVICE"
+          SELECTED_DEVICE_ID="$FIRST_DEVICE_ID"
+          SELECTED_OS="$FIRST_OS"
+        fi
+
+        echo "🎯 Selected iOS Device: $SELECTED_DEVICE (OS $SELECTED_OS)"
+        echo "🆔 Device ID: $SELECTED_DEVICE_ID"
+        echo "ios_device=$SELECTED_DEVICE" >> $GITHUB_OUTPUT
+        echo "ios_device_id=$SELECTED_DEVICE_ID" >> $GITHUB_OUTPUT
+        echo "ios_os=$SELECTED_OS" >> $GITHUB_OUTPUT
+
+    - name: Build for iOS Simulator
+      run: |
+        # 使用设备 ID 构建（更可靠）
         xcodebuild -project NekoPlayer.xcodeproj \
           -scheme "NekoPlayer (iOS)" \
           -configuration Debug \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
+          -destination "platform=iOS Simulator,id=${{ steps.select_ios.outputs.ios_device_id }}" \
           clean build \
-          CODE_SIGNING_ALLOWED=NO \
-          | xcpretty || true
-
-    - name: Build iOS (Release)
-      run: |
-        xcodebuild -project NekoPlayer.xcodeproj \
-          -scheme "NekoPlayer (iOS)" \
-          -configuration Release \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
-          clean build \
-          CODE_SIGNING_ALLOWED=NO \
-          | xcpretty || true
-
-    - name: Upload iOS Artifacts
-      uses: actions/upload-artifact@v4
-      if: success()
-      with:
-        name: NekoPlayer-iOS
-        path: |
-          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/*.app
-          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-iphonesimulator/*.app
-        retention-days: 7
-        if-no-files-found: warn
+          CODE_SIGNING_ALLOWED=NO
 
   build-tvos:
-    name: Build for tvOS
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        submodules: recursive
 
-    - name: Setup Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.0'
-
-    - name: Build tvOS
+    - name: Select Xcode version
       run: |
+        # 列出所有可用的 Xcode 版本
+        echo "📦 Available Xcode versions:"
+        ls -la /Applications/ | grep Xcode
+
+        # 自动选择最新的 Xcode 版本
+        LATEST_XCODE=$(ls /Applications/ | grep "^Xcode_" | sort -V | tail -1)
+
+        if [ -n "$LATEST_XCODE" ]; then
+          echo "🎯 Using Xcode: $LATEST_XCODE"
+          sudo xcode-select -switch "/Applications/$LATEST_XCODE"
+        else
+          echo "⚠️  No Xcode_*.app found, using default"
+        fi
+
+        xcodebuild -version
+
+    - name: Show available simulators
+      run: |
+        echo "📺 Available tvOS Simulators:"
+        xcrun simctl list devices available tvOS | grep Apple || true
+
+    - name: Auto-select tvOS simulator
+      id: select_tvos
+      run: |
+        # 使用 JSON 格式获取模拟器信息
+        JSON_OUTPUT=$(xcrun simctl list devices available tvOS --json)
+
+        echo "🔍 JSON output preview:"
+        echo "$JSON_OUTPUT" | head -c 500
+
+        # tvOS 设备优先级
+        DEVICES=(
+          "Apple TV"
+          "Apple TV 4K (3rd generation)"
+          "Apple TV 4K (2nd generation)"
+        )
+
+        # tvOS 版本优先级
+        OS_VERSIONS=(
+          "tvOS-18-0" "tvOS-17-5" "tvOS-17-4" "tvOS-17-3" "tvOS-17-2" "tvOS-17-1" "tvOS-17-0"
+          "tvOS-16-7" "tvOS-16-6" "tvOS-16-5" "tvOS-16-4" "tvOS-16-3" "tvOS-16-2" "tvOS-16-1" "tvOS-16-0"
+          "tvOS-15-7" "tvOS-15-6" "tvOS-15-5" "tvOS-15-4" "tvOS-15-3" "tvOS-15-2" "tvOS-15-1" "tvOS-15-0"
+        )
+
+        SELECTED_DEVICE=""
+        SELECTED_DEVICE_ID=""
+        SELECTED_OS=""
+
+        # 遍历设备和版本，找到第一个可用的组合
+        for device in "${DEVICES[@]}"; do
+          for os_version in "${OS_VERSIONS[@]}"; do
+            # 从 JSON 中提取设备 ID
+            DEVICE_ID=$(echo "$JSON_OUTPUT" | grep -o "\"$os_version\".*\"$device\"[^,}]*" | grep -o "\"[A-F0-9-]\{36\}\"" | head -1 | tr -d '"')
+
+            if [ ! -z "$DEVICE_ID" ]; then
+              SELECTED_DEVICE="$device"
+              SELECTED_DEVICE_ID="$DEVICE_ID"
+              # 从 tvOS-18-0 提取 18.0
+              SELECTED_OS=$(echo "$os_version" | sed 's/tvOS-//' | sed 's/-/./g')
+              echo "✅ Found: $device (tvOS $SELECTED_OS)"
+              break 2
+            fi
+          done
+        done
+
+        # 如果优先级列表中的设备都没找到，使用 JSON 中第一个可用的设备
+        if [ -z "$SELECTED_DEVICE_ID" ]; then
+          echo "⚠️  Preferred devices not found, using first available device"
+
+          # 从 JSON 中提取第一个可用设备
+          FIRST_DEVICE=$(echo "$JSON_OUTPUT" | grep -o '"[^"]*"' | grep -E "Apple TV" | head -1 | tr -d '"')
+          FIRST_DEVICE_ID=$(echo "$JSON_OUTPUT" | grep -o '"[A-F0-9-]\{36\}"' | head -1 | tr -d '"')
+          FIRST_OS=$(echo "$JSON_OUTPUT" | grep -o '"com\.apple\.CoreSimulator\.SimRuntime\.[^"]*"' | head -1 | sed 's/.*tvOS-//' | sed 's/"//' | sed 's/-/./g')
+
+          SELECTED_DEVICE="$FIRST_DEVICE"
+          SELECTED_DEVICE_ID="$FIRST_DEVICE_ID"
+          SELECTED_OS="$FIRST_OS"
+        fi
+
+        echo "🎯 Selected tvOS Device: $SELECTED_DEVICE (OS $SELECTED_OS)"
+        echo "🆔 Device ID: $SELECTED_DEVICE_ID"
+        echo "tvos_device=$SELECTED_DEVICE" >> $GITHUB_OUTPUT
+        echo "tvos_device_id=$SELECTED_DEVICE_ID" >> $GITHUB_OUTPUT
+        echo "tvos_os=$SELECTED_OS" >> $GITHUB_OUTPUT
+
+    - name: Build for tvOS Simulator
+      run: |
+        # 使用设备 ID 构建（更可靠）
         xcodebuild -project NekoPlayer.xcodeproj \
           -scheme "NekoPlayer (tvOS)" \
-          -configuration Release \
+          -configuration Debug \
           -sdk appletvsimulator \
-          -destination 'platform=tvOS Simulator,name=Apple TV,OS=16.0' \
+          -destination "platform=tvOS Simulator,id=${{ steps.select_tvos.outputs.tvos_device_id }}" \
           clean build \
-          CODE_SIGNING_ALLOWED=NO \
-          | xcpretty || true
-
-    - name: Upload tvOS Artifacts
-      uses: actions/upload-artifact@v4
-      if: success()
-      with:
-        name: NekoPlayer-tvOS
-        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-appletvsimulator/*.app
-        retention-days: 7
-        if-no-files-found: warn
-
-  build-macos:
-    name: Build for macOS
-    runs-on: macos-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-
-    - name: Setup Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.0'
-
-    - name: Build macOS
-      run: |
-        xcodebuild -project NekoPlayer.xcodeproj \
-          -scheme "NekoPlayer (iOS)" \
-          -configuration Release \
-          -destination 'platform=macOS' \
-          clean build \
-          CODE_SIGNING_ALLOWED=NO \
-          | xcpretty || true
-
-    - name: Upload macOS Artifacts
-      uses: actions/upload-artifact@v4
-      if: success()
-      with:
-        name: NekoPlayer-macOS
-        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-macos/*.app
-        retention-days: 7
-        if-no-files-found: warn
-
-  build-summary:
-    name: Build Summary
-    runs-on: macos-latest
-    needs: [build-ios, build-tvos, build-macos]
-    if: always()
-
-    steps:
-    - name: Generate Summary
-      run: |
-        echo "## 🐱 NekoPlayer Build Summary" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### Build Results" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "| Platform | Status |" >> $GITHUB_STEP_SUMMARY
-        echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
-        echo "| iOS | ${{ needs.build-ios.result }} |" >> $GITHUB_STEP_SUMMARY
-        echo "| tvOS | ${{ needs.build-tvos.result }} |" >> $GITHUB_STEP_SUMMARY
-        echo "| macOS | ${{ needs.build-macos.result }} |" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### Build Environment" >> $GITHUB_STEP_SUMMARY
-        echo "- Xcode Version: 16.0" >> $GITHUB_STEP_SUMMARY
-        echo "- iOS SDK: 16.0" >> $GITHUB_STEP_SUMMARY
-        echo "- Min iOS: 15.0" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### Features" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Anime4K Metal Shaders" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ WebDAV Integration" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Multi-platform Support" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Neko Theme Design" >> $GITHUB_STEP_SUMMARY
+          CODE_SIGNING_ALLOWED=NO
