@@ -21,7 +21,7 @@ jobs:
     - name: Setup Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.2'
+        xcode-version: '16.0'
 
     - name: List Available Simulators
       run: |
@@ -33,7 +33,7 @@ jobs:
           -scheme "NekoPlayer (iOS)" \
           -configuration Debug \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
           | xcpretty || true
@@ -44,7 +44,7 @@ jobs:
           -scheme "NekoPlayer (iOS)" \
           -configuration Release \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
           | xcpretty || true
@@ -73,7 +73,7 @@ jobs:
     - name: Setup Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.2'
+        xcode-version: '16.0'
 
     - name: Build tvOS
       run: |
@@ -81,7 +81,7 @@ jobs:
           -scheme "NekoPlayer (tvOS)" \
           -configuration Release \
           -sdk appletvsimulator \
-          -destination 'platform=tvOS Simulator,name=Apple TV,OS=17.2' \
+          -destination 'platform=tvOS Simulator,name=Apple TV,OS=18.0' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
           | xcpretty || true
@@ -108,7 +108,7 @@ jobs:
     - name: Setup Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.2'
+        xcode-version: '16.0'
 
     - name: Build macOS
       run: |
@@ -149,8 +149,8 @@ jobs:
         echo "| macOS | ${{ needs.build-macos.result }} |" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Build Environment" >> $GITHUB_STEP_SUMMARY
-        echo "- Xcode Version: 15.2" >> $GITHUB_STEP_SUMMARY
-        echo "- iOS SDK: 17.2" >> $GITHUB_STEP_SUMMARY
+        echo "- Xcode Version: 16.0" >> $GITHUB_STEP_SUMMARY
+        echo "- iOS SDK: 18.0" >> $GITHUB_STEP_SUMMARY
         echo "- Min iOS: 15.0" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Features" >> $GITHUB_STEP_SUMMARY
