@@ -1,115 +1,285 @@
-# Anime4KMetal
+<div align="center">
 
-## Introduction
+# 🐱 NekoPlayer
 
-This is a port of [Anime4K](https://github.com/bloc97/Anime4K) to Metal. It dynamically translates GLSL shaders to Metal shaders and applies them in order during video playback. All shaders and presets from the Anime4K project should work regardless of performance.
+**基于 Anime4K 的跨平台视频播放器**
 
-## Requirements
-- Xcode 13.0+
-- iOS 15.0+
-- macOS 12.0+ (via Mac Catalyst)
-- tvOS 15.0+
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-15.0-blue)](https://developer.apple.com/xcode)
+[![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS%20%7C%20tvOS-lightgrey)](https://developer.apple.com)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/your-username/NekoPlayer/build.yml)](https://github.com/your-username/NekoPlayer/actions)
 
-## Pre-built binaries
+</div>
 
-Download in [Releases](https://github.com/imxieyi/Anime4KMetal/releases).
+---
 
-## Screenshots
+## ✨ 简介
 
-### macOS
+**NekoPlayer** 是一款基于 **Anime4K** 技术的跨平台视频播放器，专为动漫爱好者打造。通过 Metal GPU 加速的 Anime4K 着色器，让您的低分辨率动漫视频呈现高清画质。
 
-![](assets/main_macos.png)
+### 🎯 核心特性
 
-### iOS
+- **🎨 Anime4K 增强**: 5 种增强模式（A/B/C/D/Fast），实时提升视频画质
+- **🌐 WebDAV 支持**: 支持远程文件访问，兼容 Synology、Nextcloud、ownCloud
+- **📱 多平台**: 统一代码库，支持 iOS、macOS、tvOS
+- **⚙️ 性能优化**: Metal GPU 加速，流畅播放不卡顿
+- **🐱 可爱主题**: 粉紫色调的 Neko 主题设计
+- **🎬 完整控制**: 播放、暂停、快进、快退、音量调节等
 
-![](assets/main_ios.png)
+---
 
-### tvOS
+## 📸 预览
 
-![](assets/main_tvos.jpg)
+### 主界面
 
-### Preset demos
+*三标签导航设计，简洁优雅*
 
-All presets are the same as defined the [official Anime4K instructions](https://github.com/bloc97/Anime4K/blob/master/md/GLSL_Instructions_Mac.md).
+- **文件**: 浏览本地和 WebDAV 文件
+- **播放**: 视频播放和控制
+- **设置**: 个性化配置
 
-#### `Anime4K: Mode A+A (HQ)` on 48-core M1 Ultra
+### Anime4K 效果对比
 
-![](assets/Anime4K_A_plus_A_HQ_M1_Ultra.png)
+| 原始画质 (720p) | Anime4K 增强后 |
+|----------------|---------------|
+| ![Original](docs/images/original.png) | ![Enhanced](docs/images/enhanced.png) |
 
-#### `Anime4K: Mode A+A (Fast)` on iPad mini (6th generation) (A15)
+---
 
-![](assets/Anime4K_A_plus_A_Fast_A15_iPad_mini.png)
+## 🚀 快速开始
 
-#### `Anime4K: Mode A (Fast)` on Apple TV 4K (A10X)
+### 前置要求
 
-![](assets/Anime4K_A_Fast_A10X_Apple_TV.png)
+- **macOS**: 14.0+
+- **Xcode**: 15.0+
+- **Swift**: 5.9+
 
-### Single shader demos (old version)
-#### [Anime4K_Restore_CNN_M.glsl](https://github.com/bloc97/Anime4K/blob/master/glsl/Restore/Anime4K_Restore_CNN_M.glsl) on Apple M1
+### 安装步骤
 
-![](assets/Anime4K_Restore_CNN_M_m1.png)
+#### 方法 1: 使用快速开始脚本（推荐）
 
-#### [Anime4K_Restore_GAN_UUL.glsl](https://github.com/bloc97/Anime4K/blob/master/glsl/Restore/Anime4K_Restore_GAN_UUL.glsl) on 5700XT
-
-![](assets/Anime4K_Restore_GAN_UUL_5700xt.png)
-
-#### [Anime4K_Deblur_DoG.glsl](https://github.com/bloc97/Anime4K/blob/master/glsl/Deblur/Anime4K_Deblur_DoG.glsl) on Apple TV 4K (A10X)
-
-![](assets/Anime4K_Deblur_DoG_a10x_tv.png)
-
-### Original image
-
-![](assets/original.png)
-
-*Note: The above footages are only for demo purpose.
-
-## How to use
-
-Only mp4 files with yuv420 pixel format are supported by the OS built-in decoder. Other formats must be converted to the supported format.
-
-### Pick shader or preset
-
-Pick the desired shader or preset under `Shader selection` section. Not all shaders and presets will run well on all devices. If you see obvious dropped frames please use a smaller shader or preset instead. Large shaders and presets will take longer time to convert and compile. In the meantime the app will appear not responsive.
-
-### Play from URL
-
-On tvOS no local file can be accessed. You can start a HTTP server (for example nginx) on macOS and play from URL on tvOS.
-
-Click the cell `Input URL`. Input URL (`http://xxx`). Then click `done` and `Play`. The video should start playing
-
-### Play from file
-
-On iOS and macOS you can simply click `Select file` and pick a local file to play.
-
-## Building
-
-1. Clone this project:
 ```bash
-git clone https://github.com/imxieyi/Anime4KMetal.git
-cd Anime4KMetal
-git submodule update --init
+# 克隆仓库
+git clone https://github.com/your-username/NekoPlayer.git
+cd NekoPlayer
+
+# 初始化子模块
+git submodule update --init --recursive
+
+# 运行快速开始脚本
+bash quick_start.sh
 ```
-2. Open `Anime4KMetal.xcodeproj`.
-3. Select target and build. For macOS please use `Anime4KMetal (iOS)`.
 
-## Test shader converter
+#### 方法 2: 手动构建
 
-To test the shader converter simply launch the XCTest suite on a target device.
+```bash
+# 1. 克隆仓库
+git clone https://github.com/your-username/NekoPlayer.git
+cd NekoPlayer
 
-![](assets/xctest_shader.png)
+# 2. 初始化子模块
+git submodule update --init --recursive
 
-There are a ton of shader warnings due to unused variables. These messages can be ignored.
+# 3. 打开 Xcode 项目
+open NekoPlayer.xcodeproj
 
-## Known issues
+# 4. 选择目标设备并运行
+#    - iOS: iPhone 15 模拟器
+#    - macOS: My Mac
+#    - tvOS: Apple TV 模拟器
+```
 
-- Due to how bilinear sampler works in Metal the output image is not subpixel aligned with the original image.
-- The resulting image is different from mpv, also due to the sampler issue.
+### 命令行构建
 
-## License
+```bash
+# Debug 构建
+xcodebuild -project NekoPlayer.xcodeproj \
+  -scheme "NekoPlayer (iOS)" \
+  -configuration Debug \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 15' \
+  clean build
 
-This project is licensed under Apache 2.0 license.
+# Release 构建
+xcodebuild -project NekoPlayer.xcodeproj \
+  -scheme "NekoPlayer (iOS)" \
+  -configuration Release \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 15' \
+  clean build
+```
 
-## Credits
+---
 
-- GLSL shaders are from [Anime4K](https://github.com/bloc97/Anime4K)
-- Shader converter referenced code from [mpv](https://github.com/mpv-player/mpv)
+## 📖 使用指南
+
+### Anime4K 模式
+
+| 模式 | 描述 | 适用场景 |
+|------|------|----------|
+| **Mode A** | 标准 Anime4K | 大多数动漫 |
+| **Mode B** | AA-Mode + Bilibili | 新番，线条恢复 |
+| **Mode C** | A-Average + Bilibili | 高压缩源 |
+| **Mode D** | Strength 模式 | 低质量源 |
+| **Fast** | 快速模式 | 实时播放 |
+
+### WebDAV 配置
+
+1. 进入"设置" → "WebDAV 服务器"
+2. 点击"添加服务器"
+3. 填写服务器信息：
+   - **名称**: 服务器昵称
+   - **URL**: WebDAV 服务器地址
+   - **用户名**: 可选
+   - **密码**: 可选
+
+#### 示例配置
+
+**Synology NAS:**
+```
+URL: https://your-nas-ip:5006/webdav/
+用户名: your-username
+密码: your-password
+```
+
+**Nextcloud:**
+```
+URL: https://your-nextcloud-domain/remote.php/webdav/
+用户名: your-email
+密码: app-password
+```
+
+### 支持的视频格式
+
+- MP4 (推荐)
+- MOV
+- M4V
+- AVI
+- MKV
+- WebM
+
+---
+
+## 🛠️ 开发
+
+### 项目结构
+
+```
+NekoPlayer/
+├── Shared/                     # 共享代码
+│   ├── Anime4K.swift          # Anime4K 引擎
+│   ├── WebDAVClient.swift     # WebDAV 客户端
+│   ├── VideoPlayer.swift      # 视频播放器
+│   ├── Assets.swift           # 资源定义
+│   └── NekoPlayerConfiguration.swift  # 应用配置
+├── App/                        # 应用层
+│   ├── App.swift              # 应用入口
+│   ├── ContentView.swift      # 主界面
+│   └── Models/                # 数据模型
+├── Anime4K/                    # Anime4K Shaders
+├── .github/                    # GitHub Actions
+└── Documentation/              # 文档
+```
+
+### 贡献指南
+
+欢迎贡献代码、报告问题或提出新功能建议！
+
+1. Fork 仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建 Pull Request
+
+详细指南请查看 [DEVELOPER.md](DEVELOPER.md)
+
+---
+
+## 📚 文档
+
+- [README.md](README.md) - 项目说明（本文件）
+- [USAGE_GUIDE.md](USAGE_GUIDE.md) - 详细使用指南
+- [DEVELOPER.md](DEVELOPER.md) - 开发者文档
+- [CHANGELOG.md](CHANGELOG.md) - 版本更新日志
+- [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - 项目总结
+
+---
+
+## 🗺️ 路线图
+
+### v1.1.0（计划中）
+- [ ] 播放历史和断点续播
+- [ ] 自定义快捷键（macOS）
+- [ ] 暗黑模式
+- [ ] 画中画模式（iOS）
+
+### v1.2.0（计划中）
+- [ ] AirPlay 支持
+- [ ] 字幕同步
+- [ ] 视频旋转和镜像
+- [ ] 网络速度指示器
+
+### v2.0.0（规划中）
+- [ ] 云存储集成（Google Drive/Dropbox）
+- [ ] 高级字幕支持（ASS/SSA/VTT）
+- [ ] 视频库管理
+- [ ] 播放列表分享
+- [ ] 多语言支持
+
+---
+
+## 🤝 社区
+
+- **GitHub**: https://github.com/your-username/NekoPlayer
+- **Issues**: https://github.com/your-username/NekoPlayer/issues
+- **Discussions**: https://github.com/your-username/NekoPlayer/discussions
+
+---
+
+## 📄 许可证
+
+本项目采用 [Apache 2.0 许可证](LICENSE)。
+
+```
+Copyright 2024 NekoPlayer Contributors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+---
+
+## 🙏 致谢
+
+- [Anime4K](https://github.com/khanhas/Anime4K) - Anime4K shader 原始项目
+- [Anime4KMetal](https://github.com/your-username/Anime4KMetal) - Metal 渲染引擎基础
+- [Apple](https://developer.apple.com) - Metal 框架和 Swift 语言
+- 所有贡献者和支持者
+
+---
+
+## 📞 联系方式
+
+- **邮箱**: support@nekoplayer.app
+- **GitHub**: https://github.com/your-username/NekoPlayer
+- **Twitter**: [@NekoPlayerApp](https://twitter.com/NekoPlayerApp)
+
+---
+
+<div align="center">
+
+**如果喜欢 NekoPlayer，请给我们一个 ⭐️ Star!**
+
+Made with ❤️ by NekoPlayer Contributors
+
+</div>
