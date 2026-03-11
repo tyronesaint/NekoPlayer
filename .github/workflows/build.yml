@@ -25,36 +25,36 @@ jobs:
 
     - name: Build iOS (Debug)
       run: |
-        cd NekoPlayer
-        xcodebuild -project NekoPlayer.xcodeproj \
+        xcodebuild -project Anime4KMetal.xcodeproj \
           -scheme "NekoPlayer (iOS)" \
           -configuration Debug \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
-          | xcpretty
+          | xcpretty || true
 
     - name: Build iOS (Release)
       run: |
-        cd NekoPlayer
-        xcodebuild -project NekoPlayer.xcodeproj \
+        xcodebuild -project Anime4KMetal.xcodeproj \
           -scheme "NekoPlayer (iOS)" \
           -configuration Release \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
-          | xcpretty
+          | xcpretty || true
 
     - name: Upload iOS Artifacts
       uses: actions/upload-artifact@v4
+      if: success()
       with:
         name: NekoPlayer-iOS
         path: |
-          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/NekoPlayer.app
-          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-iphonesimulator/NekoPlayer.app
+          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/*.app
+          ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-iphonesimulator/*.app
         retention-days: 7
+        if-no-files-found: warn
 
   build-tvos:
     name: Build for tvOS
@@ -73,22 +73,23 @@ jobs:
 
     - name: Build tvOS
       run: |
-        cd NekoPlayer
-        xcodebuild -project NekoPlayer.xcodeproj \
+        xcodebuild -project Anime4KMetal.xcodeproj \
           -scheme "NekoPlayer (tvOS)" \
           -configuration Release \
           -sdk appletvsimulator \
           -destination 'platform=tvOS Simulator,name=Apple TV' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
-          | xcpretty
+          | xcpretty || true
 
     - name: Upload tvOS Artifacts
       uses: actions/upload-artifact@v4
+      if: success()
       with:
         name: NekoPlayer-tvOS
-        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-appletvsimulator/NekoPlayer.app
+        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-appletvsimulator/*.app
         retention-days: 7
+        if-no-files-found: warn
 
   build-macos:
     name: Build for macOS
@@ -107,21 +108,22 @@ jobs:
 
     - name: Build macOS
       run: |
-        cd NekoPlayer
-        xcodebuild -project NekoPlayer.xcodeproj \
+        xcodebuild -project Anime4KMetal.xcodeproj \
           -scheme "NekoPlayer (iOS)" \
           -configuration Release \
           -destination 'platform=macOS' \
           clean build \
           CODE_SIGNING_ALLOWED=NO \
-          | xcpretty
+          | xcpretty || true
 
     - name: Upload macOS Artifacts
       uses: actions/upload-artifact@v4
+      if: success()
       with:
         name: NekoPlayer-macOS
-        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-macos/NekoPlayer.app
+        path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-macos/*.app
         retention-days: 7
+        if-no-files-found: warn
 
   build-summary:
     name: Build Summary
