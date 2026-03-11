@@ -12,7 +12,7 @@
 		8A07C94427783FC10023EC36 /* MPVShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6A127782E0400C09201 /* MPVShader.swift */; };
 		8A07C94527783FCD0023EC36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DF66227782DD700C09201 /* Assets.xcassets */; };
 		8A07C94627783FD40023EC36 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66127782DD700C09201 /* ContentView.swift */; };
-		8A07C94727783FD60023EC36 /* Anime4KMetalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66027782DD700C09201 /* Anime4KMetalApp.swift */; };
+		8A07C94727783FD60023EC36 /* NekoPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66027782DD700C09201 /* NekoPlayerApp.swift */; };
 		8A07C948277840160023EC36 /* MPVShaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6A627782E4100C09201 /* MPVShaderTests.swift */; };
 		8A07C94C277842DA0023EC36 /* MPVShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6A127782E0400C09201 /* MPVShader.swift */; };
 		8A07C94E277842DB0023EC36 /* MPVShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6A127782E0400C09201 /* MPVShader.swift */; };
@@ -30,7 +30,7 @@
 		8A07C9642778544C0023EC36 /* Average.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07C95E2778544C0023EC36 /* Average.swift */; };
 		8A07C9662778B2570023EC36 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07C9652778B2570023EC36 /* PlayerView.swift */; };
 		8A07C9672778B2570023EC36 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07C9652778B2570023EC36 /* PlayerView.swift */; };
-		8A0DF68827782DD700C09201 /* Anime4KMetalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66027782DD700C09201 /* Anime4KMetalApp.swift */; };
+		8A0DF68827782DD700C09201 /* NekoPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66027782DD700C09201 /* NekoPlayerApp.swift */; };
 		8A0DF68A27782DD700C09201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF66127782DD700C09201 /* ContentView.swift */; };
 		8A0DF68C27782DD700C09201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DF66227782DD700C09201 /* Assets.xcassets */; };
 		8A0DF6A227782E0500C09201 /* MPVShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6A127782E0400C09201 /* MPVShader.swift */; };
@@ -56,31 +56,31 @@
 			containerPortal = 8A0DF65B27782DD700C09201 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8A07C91827783F870023EC36;
-			remoteInfo = Anime4KMetal;
+			remoteInfo = NekoPlayer;
 		};
 		8A0DF67527782DD700C09201 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A0DF65B27782DD700C09201 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8A0DF66627782DD700C09201;
-			remoteInfo = "Anime4KMetal (iOS)";
+			remoteInfo = "NekoPlayer (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8A07C91027783E530023EC36 /* glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = glsl; path = Anime4K/glsl; sourceTree = SOURCE_ROOT; };
-		8A07C91927783F870023EC36 /* Anime4KMetal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anime4KMetal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A07C91927783F870023EC36 /* NekoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NekoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A07C93227783F880023EC36 /* Tests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A07C95127784B9F0023EC36 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		8A07C95727784C680023EC36 /* Anime4K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime4K.swift; sourceTree = "<group>"; };
 		8A07C95E2778544C0023EC36 /* Average.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Average.swift; sourceTree = "<group>"; };
 		8A07C9652778B2570023EC36 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		8A07C9722778BBBF0023EC36 /* Anime4KMetal--tvOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Anime4KMetal--tvOS--Info.plist"; sourceTree = "<group>"; };
-		8A07C9732778EC920023EC36 /* Anime4KMetal--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Anime4KMetal--iOS--Info.plist"; sourceTree = "<group>"; };
-		8A0DF66027782DD700C09201 /* Anime4KMetalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime4KMetalApp.swift; sourceTree = "<group>"; };
+		8A07C9722778BBBF0023EC36 /* NekoPlayer--tvOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NekoPlayer--tvOS--Info.plist"; sourceTree = "<group>"; };
+		8A07C9732778EC920023EC36 /* NekoPlayer--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "NekoPlayer--iOS--Info.plist"; sourceTree = "<group>"; };
+		8A0DF66027782DD700C09201 /* NekoPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NekoPlayerApp.swift; sourceTree = "<group>"; };
 		8A0DF66127782DD700C09201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8A0DF66227782DD700C09201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8A0DF66727782DD700C09201 /* Anime4KMetal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anime4KMetal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A0DF66727782DD700C09201 /* NekoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NekoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0DF67427782DD700C09201 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0DF6A127782E0400C09201 /* MPVShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVShader.swift; sourceTree = "<group>"; };
 		8A0DF6A627782E4100C09201 /* MPVShaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVShaderTests.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		8AA22ED229CFD067004FC764 /* TVMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMenu.swift; sourceTree = "<group>"; };
 		8AA22ED529D05BAA004FC764 /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
 		8AD5B6EE2C11F56F00E81107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8AECBC1727790AA200922C26 /* Anime4KMetal (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Anime4KMetal (iOS).entitlements"; sourceTree = "<group>"; };
+		8AECBC1727790AA200922C26 /* NekoPlayer (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NekoPlayer (iOS).entitlements"; sourceTree = "<group>"; };
 		8AF01DD829D4BDF5009A4283 /* AutoStoredWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoStoredWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,9 +131,9 @@
 		8A0DF65A27782DD700C09201 = {
 			isa = PBXGroup;
 			children = (
-				8AECBC1727790AA200922C26 /* Anime4KMetal (iOS).entitlements */,
-				8A07C9732778EC920023EC36 /* Anime4KMetal--iOS--Info.plist */,
-				8A07C9722778BBBF0023EC36 /* Anime4KMetal--tvOS--Info.plist */,
+				8AECBC1727790AA200922C26 /* NekoPlayer (iOS).entitlements */,
+				8A07C9732778EC920023EC36 /* NekoPlayer--iOS--Info.plist */,
+				8A07C9722778BBBF0023EC36 /* NekoPlayer--tvOS--Info.plist */,
 				8A0DF65F27782DD700C09201 /* Shared */,
 				8A0DF6AB27782E8700C09201 /* Tests Shared */,
 				8A0DF66827782DD700C09201 /* Products */,
@@ -146,7 +146,7 @@
 			children = (
 				8A07C91027783E530023EC36 /* glsl */,
 				8AA22ED829D05C3A004FC764 /* UI */,
-				8A0DF66027782DD700C09201 /* Anime4KMetalApp.swift */,
+				8A0DF66027782DD700C09201 /* NekoPlayerApp.swift */,
 				8AD5B6EE2C11F56F00E81107 /* AppDelegate.swift */,
 				8A0DF66227782DD700C09201 /* Assets.xcassets */,
 				8A0DF6A127782E0400C09201 /* MPVShader.swift */,
@@ -160,9 +160,9 @@
 		8A0DF66827782DD700C09201 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A0DF66727782DD700C09201 /* Anime4KMetal.app */,
+				8A0DF66727782DD700C09201 /* NekoPlayer.app */,
 				8A0DF67427782DD700C09201 /* Tests iOS.xctest */,
-				8A07C91927783F870023EC36 /* Anime4KMetal.app */,
+				8A07C91927783F870023EC36 /* NekoPlayer.app */,
 				8A07C93227783F880023EC36 /* Tests tvOS.xctest */,
 			);
 			name = Products;
@@ -199,9 +199,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A07C91827783F870023EC36 /* Anime4KMetal (tvOS) */ = {
+		8A07C91827783F870023EC36 /* NekoPlayer (tvOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A07C93A27783F880023EC36 /* Build configuration list for PBXNativeTarget "Anime4KMetal (tvOS)" */;
+			buildConfigurationList = 8A07C93A27783F880023EC36 /* Build configuration list for PBXNativeTarget "NekoPlayer (tvOS)" */;
 			buildPhases = (
 				8A07C91527783F870023EC36 /* Sources */,
 				8A07C91627783F870023EC36 /* Frameworks */,
@@ -211,12 +211,12 @@
 			);
 			dependencies = (
 			);
-			name = "Anime4KMetal (tvOS)";
+			name = "NekoPlayer (tvOS)";
 			packageProductDependencies = (
 				8A8FBD2329CED13100BD0722 /* Atomics */,
 			);
-			productName = Anime4KMetal;
-			productReference = 8A07C91927783F870023EC36 /* Anime4KMetal.app */;
+			productName = NekoPlayer;
+			productReference = 8A07C91927783F870023EC36 /* NekoPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8A07C93127783F880023EC36 /* Tests tvOS */ = {
@@ -236,13 +236,13 @@
 			packageProductDependencies = (
 				8AA22ED029CF748F004FC764 /* Atomics */,
 			);
-			productName = Anime4KMetalUITests;
+			productName = NekoPlayerUITests;
 			productReference = 8A07C93227783F880023EC36 /* Tests tvOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		8A0DF66627782DD700C09201 /* Anime4KMetal (iOS) */ = {
+		8A0DF66627782DD700C09201 /* NekoPlayer (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A0DF69027782DD700C09201 /* Build configuration list for PBXNativeTarget "Anime4KMetal (iOS)" */;
+			buildConfigurationList = 8A0DF69027782DD700C09201 /* Build configuration list for PBXNativeTarget "NekoPlayer (iOS)" */;
 			buildPhases = (
 				8A0DF66327782DD700C09201 /* Sources */,
 				8A0DF66427782DD700C09201 /* Frameworks */,
@@ -252,12 +252,12 @@
 			);
 			dependencies = (
 			);
-			name = "Anime4KMetal (iOS)";
+			name = "NekoPlayer (iOS)";
 			packageProductDependencies = (
 				8A8FBD2029CED11B00BD0722 /* Atomics */,
 			);
-			productName = "Anime4KMetal (iOS)";
-			productReference = 8A0DF66727782DD700C09201 /* Anime4KMetal.app */;
+			productName = "NekoPlayer (iOS)";
+			productReference = 8A0DF66727782DD700C09201 /* NekoPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8A0DF67327782DD700C09201 /* Tests iOS */ = {
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A0DF65E27782DD700C09201 /* Build configuration list for PBXProject "Anime4KMetal" */;
+			buildConfigurationList = 8A0DF65E27782DD700C09201 /* Build configuration list for PBXProject "NekoPlayer" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -323,8 +323,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A0DF66627782DD700C09201 /* Anime4KMetal (iOS) */,
-				8A07C91827783F870023EC36 /* Anime4KMetal (tvOS) */,
+				8A0DF66627782DD700C09201 /* NekoPlayer (iOS) */,
+				8A07C91827783F870023EC36 /* NekoPlayer (tvOS) */,
 				8A0DF67327782DD700C09201 /* Tests iOS */,
 				8A07C93127783F880023EC36 /* Tests tvOS */,
 			);
@@ -376,7 +376,7 @@
 				8AA22ED729D05BAA004FC764 /* UserConfig.swift in Sources */,
 				8A07C95C277854320023EC36 /* Anime4K.swift in Sources */,
 				8AF01DDA29D4BDF5009A4283 /* AutoStoredWrapper.swift in Sources */,
-				8A07C94727783FD60023EC36 /* Anime4KMetalApp.swift in Sources */,
+				8A07C94727783FD60023EC36 /* NekoPlayerApp.swift in Sources */,
 				8A07C9672778B2570023EC36 /* PlayerView.swift in Sources */,
 				8AA22ED429CFD067004FC764 /* TVMenu.swift in Sources */,
 				8A07C94427783FC10023EC36 /* MPVShader.swift in Sources */,
@@ -413,7 +413,7 @@
 				8A07C95F2778544C0023EC36 /* Average.swift in Sources */,
 				8A07C95227784B9F0023EC36 /* PlayerController.swift in Sources */,
 				8AA22ECC29CF6A96004FC764 /* CenterResize.metal in Sources */,
-				8A0DF68827782DD700C09201 /* Anime4KMetalApp.swift in Sources */,
+				8A0DF68827782DD700C09201 /* NekoPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,12 +433,12 @@
 /* Begin PBXTargetDependency section */
 		8A07C93427783F880023EC36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A07C91827783F870023EC36 /* Anime4KMetal (tvOS) */;
+			target = 8A07C91827783F870023EC36 /* NekoPlayer (tvOS) */;
 			targetProxy = 8A07C93327783F880023EC36 /* PBXContainerItemProxy */;
 		};
 		8A0DF67627782DD700C09201 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A0DF66627782DD700C09201 /* Anime4KMetal (iOS) */;
+			target = 8A0DF66627782DD700C09201 /* NekoPlayer (iOS) */;
 			targetProxy = 8A0DF67527782DD700C09201 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -454,7 +454,7 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Anime4KMetal--tvOS--Info.plist";
+				INFOPLIST_FILE = "NekoPlayer--tvOS--Info.plist";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,8 +462,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.Anime4KMetal;
-				PRODUCT_NAME = Anime4KMetal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.NekoPlayer;
+				PRODUCT_NAME = NekoPlayer;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -482,7 +482,7 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Anime4KMetal--tvOS--Info.plist";
+				INFOPLIST_FILE = "NekoPlayer--tvOS--Info.plist";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -490,8 +490,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.Anime4KMetal;
-				PRODUCT_NAME = Anime4KMetal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.NekoPlayer;
+				PRODUCT_NAME = NekoPlayer;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -516,7 +516,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = "Anime4KMetal (tvOS)";
+				TEST_TARGET_NAME = "NekoPlayer (tvOS)";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Debug;
@@ -536,7 +536,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = "Anime4KMetal (tvOS)";
+				TEST_TARGET_NAME = "NekoPlayer (tvOS)";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -658,13 +658,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Anime4KMetal (iOS).entitlements";
+				CODE_SIGN_ENTITLEMENTS = "NekoPlayer (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Anime4KMetal--iOS--Info.plist";
+				INFOPLIST_FILE = "NekoPlayer--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -676,8 +676,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.Anime4KMetal;
-				PRODUCT_NAME = Anime4KMetal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.NekoPlayer;
+				PRODUCT_NAME = NekoPlayer;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -691,13 +691,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Anime4KMetal (iOS).entitlements";
+				CODE_SIGN_ENTITLEMENTS = "NekoPlayer (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Anime4KMetal--iOS--Info.plist";
+				INFOPLIST_FILE = "NekoPlayer--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -709,8 +709,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.Anime4KMetal;
-				PRODUCT_NAME = Anime4KMetal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imxieyi.NekoPlayer;
+				PRODUCT_NAME = NekoPlayer;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -736,7 +736,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
-				TEST_TARGET_NAME = "Anime4KMetal (iOS)";
+				TEST_TARGET_NAME = "NekoPlayer (iOS)";
 			};
 			name = Debug;
 		};
@@ -756,7 +756,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
-				TEST_TARGET_NAME = "Anime4KMetal (iOS)";
+				TEST_TARGET_NAME = "NekoPlayer (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -764,7 +764,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A07C93A27783F880023EC36 /* Build configuration list for PBXNativeTarget "Anime4KMetal (tvOS)" */ = {
+		8A07C93A27783F880023EC36 /* Build configuration list for PBXNativeTarget "NekoPlayer (tvOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A07C93B27783F880023EC36 /* Debug */,
@@ -782,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A0DF65E27782DD700C09201 /* Build configuration list for PBXProject "Anime4KMetal" */ = {
+		8A0DF65E27782DD700C09201 /* Build configuration list for PBXProject "NekoPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A0DF68E27782DD700C09201 /* Debug */,
@@ -791,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A0DF69027782DD700C09201 /* Build configuration list for PBXNativeTarget "Anime4KMetal (iOS)" */ = {
+		8A0DF69027782DD700C09201 /* Build configuration list for PBXNativeTarget "NekoPlayer (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A0DF69127782DD700C09201 /* Debug */,
