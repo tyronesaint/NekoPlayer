@@ -16,7 +16,7 @@
 import SwiftUI
 
 @main
-struct Anime4KMetalApp: App {
+struct NekoPlayerApp: App {
     #if !os(tvOS)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
